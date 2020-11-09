@@ -27,8 +27,14 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-            services.AddDbContext<DataContext>(x =>
-            x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DataContext>(x =>
+            // x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(
+                    @"Server=tcp:pablosouzatest.database.windows.net,1433;Database=testdb;Persist Security Info=False;User ID=paguirre82;Password=Ingrid1pqp;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            }); 
 
             services.AddCors(opt =>
             {
