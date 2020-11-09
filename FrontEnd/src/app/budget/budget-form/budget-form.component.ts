@@ -32,10 +32,10 @@ export class BudgetFormComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    
+    if (this.service.formData.id == 0)
       this.insertRecord(form)
-   
-   
+    else 
+      this.updateRecord(form)
   }
 
   insertRecord(form: NgForm) {
@@ -43,7 +43,7 @@ export class BudgetFormComponent implements OnInit {
       res => {
         console.log("Insert ok")
         this.resetForm(form);
-        // this.service.getList();
+        this.service.getList();
       },
       err => {
         console.log(err);
@@ -51,18 +51,18 @@ export class BudgetFormComponent implements OnInit {
     );
   }
 
-  // updateRecord(form: NgForm) {
-  //   this.service.putRecordDetail().subscribe(
-  //     res => {
-  //       console.log("Update ok")
-  //       this.resetForm(form);
-  //       this.service.getList();
-  //     },
-  //     err => {
-  //       console.log(err);
+  updateRecord(form: NgForm) {
+    this.service.putRecordDetail().subscribe(
+      res => {
+        console.log("Update ok")
+        this.resetForm(form);
+        this.service.getList();
+      },
+      err => {
+        console.log(err);
         
-  //     }
-  //   );
-  // }
+      }
+    );
+  }
 
 }
