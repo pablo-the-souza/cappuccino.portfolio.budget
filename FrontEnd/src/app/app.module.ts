@@ -5,8 +5,6 @@ import { HttpClientModule } from "@angular/common/http"
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
-import { BudgetService } from './budget/budget.service';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
@@ -30,7 +28,7 @@ import { BudgetListComponent } from './budget/budget-list/budget-list.component'
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [BudgetService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
