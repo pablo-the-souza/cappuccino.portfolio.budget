@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { Record } from './record.model';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BudgetService {
-  ELEMENT_DATA: Record[] = []
   formData: Record;
-  readonly rootURL = 'https://boxestest.azurewebsites.net/api'; 
+  ELEMENT_DATA: Record[] = []
+  readonly rootURL = 'https://boxestest.azurewebsites.net/api';
+  // readonly rootURL = 'https://localhost:4200/api'; 
   dataSource = new MatTableDataSource<Record>(this.ELEMENT_DATA);
+
+  private fbSubs: Subscription[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -37,4 +41,9 @@ export class BudgetService {
     return this.http.get(this.rootURL+'/records').toPromise()
     .then(records => this.dataSource.data = records as Record[])
   }
+
+  cancelSubscriptions() {
+    this.fbSubs.forEach(sub => sub.unsubscribe());
+}
+
 }
