@@ -8,7 +8,7 @@ fxLayoutGap="10px"
 autocomplete="off" 
 (submit)="onSubmit(form)">
   <input type="hidden" name="id" [value]="service.formData.id">
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
       <input 
       matInput
@@ -18,7 +18,20 @@ autocomplete="off"
       class="form-control" 
       placeholder="Date"
       required>
-  </mat-form-field>
+  </mat-form-field> -->
+
+  <mat-form-field>
+    <input 
+      matInput 
+      name="date"
+      #date="ngModel"
+      [(ngModel)]="service.formData.date"
+      placeholder="Date" 
+      [matDatepicker]="picker"
+      required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 
 
   <mat-form-field appearance="fill">
