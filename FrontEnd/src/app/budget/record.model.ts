@@ -1,3 +1,5 @@
+import { Category } from './category.model';
+
 export class Record {
     id: number; 
     date: Date;
@@ -5,5 +7,6 @@ export class Record {
     value: number;
     categoryId: number;
     type: string;
+    category?: Category;
 }
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using API.Entities;
 
-namespace Core.Entities
+namespace API.Entities
 {
     public class Category
     {

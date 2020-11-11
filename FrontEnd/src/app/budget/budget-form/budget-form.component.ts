@@ -43,7 +43,7 @@ export class BudgetFormComponent implements OnInit {
       res => {
         console.log("Insert ok")
         this.resetForm(form);
-        this.service.getList();
+        this.service.getRecords();
       },
       err => {
         console.log(err);
@@ -56,7 +56,7 @@ export class BudgetFormComponent implements OnInit {
       res => {
         console.log("Update ok")
         this.resetForm(form);
-        this.service.getList();
+        this.service.getRecords();
       },
       err => {
         console.log(err);

@@ -36,7 +36,8 @@ export class BudgetListComponent implements OnInit, AfterViewInit {
   }
 
   public getAllReports() {
-    let resp = this.service.getList();
+    let resp = this.service.getRecords();
+    console.log(resp)
     resp.then(records => this.dataSource.data = records as Record[]);
   }
 
@@ -44,7 +45,7 @@ export class BudgetListComponent implements OnInit, AfterViewInit {
     if (confirm('Are you sure?')) {
       this.service.deleteRecordDetail(id)
         .subscribe(
-          res => { this.service.getList(); },
+          res => { this.service.getRecords(); },
           err => {
             console.log(err);
           })

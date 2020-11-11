@@ -2,10 +2,11 @@
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CourseLibrary.API.Controllers
+namespace Cappuccino.Portfolio.Budget.API.Controllers
 {
     [ApiController]
     [Route("api/records")]
@@ -21,7 +22,9 @@ namespace CourseLibrary.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Record>> GetRecords()
         {
-            return _context.Records.ToList();
+            return _context.Records
+            .Include(r => r.Category)
+            .ToList();
         }
 
         [HttpGet("{id}", Name = "GetRecordById")]
