@@ -60,7 +60,7 @@ autocomplete="off"
 <mat-form-field appearance="fill">
   <mat-label>Category</mat-label>
   <!-- <mat-select name="passingCategory" #category="ngModel" [(ngModel)]="service.formData.category.id" > -->
-    <mat-select name="categoryId" ngModel>
+    <mat-select name="categoryId" ngModel [(ngModel)]="service.formData.categoryId">
     <mat-option  *ngFor="let record of records | async " [value]="record.category.id" >
       {{ record.category.name }}
     </mat-option>

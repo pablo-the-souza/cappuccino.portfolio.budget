@@ -12,6 +12,7 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // modelBuilder.Entity<Category>().Property(c => c.Id).ValueGeneratedOnAdd();
             //seed database with dummy data
             modelBuilder.Entity<Record>().HasData(
                 new Record()
@@ -45,8 +46,8 @@ namespace API.Data
                 }
                 );
 
-            // modelBuilder.Entity<Category>()
-            //    .HasAlternateKey(c => c.Name);
+            modelBuilder.Entity<Category>()
+               .HasAlternateKey(c => c.Name);
 
             modelBuilder.Entity<Category>().HasData(
             new Category()

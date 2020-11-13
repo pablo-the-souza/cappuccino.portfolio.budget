@@ -37,7 +37,6 @@ export class BudgetFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log("I'm category Id = " + form.value.categoryId)
     if (this.service.formData.id == 0)
       this.insertRecord(form)
     else 
@@ -45,6 +44,7 @@ export class BudgetFormComponent implements OnInit {
   }
 
   insertRecord(form: NgForm) {
+    console.log("I'm category Id = " + form.value.categoryId)
     this.service.postRecordDetail().subscribe(
       res => {
         this.resetForm(form);
