@@ -8,17 +8,6 @@ fxLayoutGap="10px"
 autocomplete="off" 
 (submit)="onSubmit(form)">
   <input type="hidden" name="id" [value]="service.formData.id">
-  <!-- <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
-      <input 
-      matInput
-      name="date" 
-      #date="ngModel" 
-      [(ngModel)]="service.formData.date" 
-      class="form-control" 
-      placeholder="Date"
-      required>
-  </mat-form-field> -->
 
   <mat-form-field>
     <input 
@@ -58,17 +47,25 @@ autocomplete="off"
       required>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
       <mat-label>Category</mat-label>
       <input 
       matInput
-      name="category" 
-      #category="ngModel" 
-      [(ngModel)]="service.formData.category.name" 
+      
+    
       class="form-control" 
       placeholder="Category"
-      required>
-  </mat-form-field>
+      >
+  </mat-form-field> -->
+<mat-form-field appearance="fill">
+  <mat-label>Category</mat-label>
+  <!-- <mat-select name="passingCategory" #category="ngModel" [(ngModel)]="service.formData.category.id" > -->
+    <mat-select name="categoryId" ngModel>
+    <mat-option  *ngFor="let record of records | async " [value]="record.category.id" >
+      {{ record.category.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
   <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>

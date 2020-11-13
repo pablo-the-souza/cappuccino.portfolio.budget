@@ -10,37 +10,38 @@ namespace Cappuccino.Portfolio.Budget.API.Controllers
 {
     [ApiController]
     [Route("api/records")]
-    public class RecordsController : ControllerBase
-    {
-        private readonly DataContext _context;
-
-        public RecordsController(DataContext context)
+        public class RecordsController : ControllerBase
         {
-            _context = context;
-        }
-        
-        [HttpGet]
-        public ActionResult<IEnumerable<Record>> GetRecords()
-        {
-            return _context.Records
-            .Include(r => r.Category)
-            .ToList();
-        }
+            private readonly DataContext _context;
 
-        [HttpGet("{id}", Name = "GetRecordById")]
-        public ActionResult<Record> GetRecordById(int id)
-        {
-            return _context.Records.Find(id);
-        }
+            public RecordsController(DataContext context)
+            {
+                _context = context;
+            }
+            
+            [HttpGet]
+            public ActionResult<IEnumerable<Record>> GetRecords()
+            {
+                return _context.Records
+                .Include(r => r.Category)
+                .ToList();
+            }
 
-        [HttpPost]
-        public ActionResult<Record> AddRecord(Record record)
-        {
-            _context.Records.Add(record);
-            _context.SaveChanges();
+            [HttpGet("{id}", Name = "GetRecordById")]
+            public ActionResult<Record> GetRecordById(int id)
+            {
+                return _context.Records.Find(id);
+            }
 
-            return CreatedAtAction("GetRecordById", new { id = record.Id }, record);
-        }
+            [HttpPost]
+            public ActionResult<Record> AddRecord(Record record)
+            {
+                // var recordToAdd
+                _context.Records.Add(record);
+                _context.SaveChanges();
+
+                return CreatedAtAction("GetRecordById", new { id = record.Id }, record);
+            }
 
         [HttpDelete("{id}")]
         public ActionResult<Record> DeleteRecord(int id)

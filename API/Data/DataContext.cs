@@ -45,6 +45,9 @@ namespace API.Data
                 }
                 );
 
+            // modelBuilder.Entity<Category>()
+            //    .HasAlternateKey(c => c.Name);
+
             modelBuilder.Entity<Category>().HasData(
             new Category()
             {
@@ -64,6 +67,8 @@ namespace API.Data
                 Name = "Eating Out"
             }
             );
+
+            
         }
     }
 }

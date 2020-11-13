@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Record } from './record.model';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Category } from './category.model';
 
 
@@ -13,7 +13,6 @@ export class BudgetService {
   formData: Record;
   ELEMENT_DATA: Record[] = []
   dataSource = new MatTableDataSource<Record>(this.ELEMENT_DATA);
-  categoryList : Category[];
 
   // readonly rootURL = 'https://boxestest.azurewebsites.net/api';
   readonly rootURL = 'https://localhost:5001/api'; 
@@ -46,9 +45,9 @@ export class BudgetService {
       .then(records => this.dataSource.data = records as Record[])
   }
 
-  public getCategories() {
-    return this.http.get(this.rootURL + '/categories').toPromise()
-    .then(res => this.categoryList = res as Category[])
+  public getRecordsForForm() {
+    return this.http.get<any>(this.rootURL + '/records')
+      
   }
 
   cancelSubscriptions() {
