@@ -31,6 +31,11 @@ export class BudgetListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  // hideValues () {
+  //   this.dataSource.filteredData()
+  // }
+  
+
   populateForm(rd: Record) {
     this.service.formData = Object.assign({}, rd)
   }

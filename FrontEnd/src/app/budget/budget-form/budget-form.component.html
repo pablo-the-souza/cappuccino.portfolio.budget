@@ -1,5 +1,4 @@
 
-
 <form 
 fxLayout="row" 
 fxLayoutAlign="center center"
@@ -8,7 +7,7 @@ fxLayoutGap="10px"
 autocomplete="off" 
 (submit)="onSubmit(form)">
   <input type="hidden" name="id" [value]="service.formData.id">
-
+<!-- DATE-PICKER -->
   <mat-form-field>
     <input 
       matInput 
@@ -22,6 +21,7 @@ autocomplete="off"
     <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
+<!-- NAME -->
 
   <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
@@ -31,10 +31,11 @@ autocomplete="off"
       #name="ngModel" 
       [(ngModel)]="service.formData.name" 
       class="form-control" 
-      placeholder="Name"
+      placeholder="name"
       required>
   </mat-form-field>
 
+  <!-- VALUE -->
   <mat-form-field appearance="fill">
       <mat-label>Value</mat-label>
       <input 
@@ -43,29 +44,42 @@ autocomplete="off"
       #value="ngModel" 
       [(ngModel)]="service.formData.value" 
       class="form-control" 
-      placeholder="value"
+      placeholder="Value"
       required>
   </mat-form-field>
-
-  <!-- <mat-form-field appearance="fill">
+  
+  <!-- <div>
+    <mat-form-field *ngIf="!isAddingCategory" appearance="fill">
       <mat-label>Category</mat-label>
-      <input 
-      matInput
-      
+        <mat-select name="categoryId" ngModel [(ngModel)]="service.formData.categoryId" [(value)]="selectedValue">
+        <mat-option  *ngFor="let record of records | async " [value]="record.category.name" >
+          {{ record.category.name }} - 
+          {{ record.category.id }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+
+  <!-- CATEGORY -->
+  
     
+      <input 
+      type=hidden
+      name="categoryId" 
+      #categoryId="ngModel" 
+      [(ngModel)]="service.formData.categoryId" 
       class="form-control" 
-      placeholder="Category"
+      placeholder=""
+      required
       >
-  </mat-form-field> -->
-<mat-form-field appearance="fill">
-  <mat-label>Category</mat-label>
-  <!-- <mat-select name="passingCategory" #category="ngModel" [(ngModel)]="service.formData.category.id" > -->
-    <mat-select name="categoryId" ngModel [(ngModel)]="service.formData.categoryId">
-    <mat-option  *ngFor="let record of records | async " [value]="record.category.id" >
-      {{ record.category.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+ 
+
+
+  
+
+
+<!-- TYPE -->
+  
 
   <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
@@ -79,8 +93,69 @@ autocomplete="off"
       required>
   </mat-form-field>
 
+  <!-- BUTTON -->
+
   <div class="form-group">
       <button class="btn-success btn-lg btn-block" type="submit">Submit</button>
   </div>
+
+</form>
+
+<!-- ADD CATEGORY FORM -->
+
+<form 
+*ngIf="!isAddingCategory"
+fxLayout="row" 
+fxLayoutAlign="center center"
+fxLayoutGap="10px"
+#form="ngForm" 
+autocomplete="off" >
+<mat-label >Can't find your category?</mat-label>
+<div class="form-group">
+  <button class="btn-success btn-block" (click)="changeIsAddingCategory()">Add New Category</button>
+</div>
+
+</form>
+
+
+<div>
+  <mat-form-field *ngIf="!isAddingCategory" appearance="fill">
+    <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="selectedOption" (selectionChange) = updateCategory(event)>
+      <mat-option  *ngFor="let category of categories | async " [value]="category.id" >
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- ADD CATEGORY FORM 2 -->
+
+<form *ngIf="isAddingCategory"
+fxLayout="row" 
+fxLayoutAlign="center center"
+fxLayoutGap="10px"
+#categoryForm="ngForm" 
+autocomplete="off" 
+(submit)="insertCategory(categoryForm)">
+
+
+  <mat-form-field  appearance="fill">
+    <mat-label>Add Category</mat-label>
+    <input 
+    matInput
+    name="name"
+    #name="ngModel"
+    [(ngModel)]="service.categoryFormData.name" 
+    class="form-control" 
+    placeholder="Category"
+    required
+    >
+
+</mat-form-field>
+
+<div class="form-group">
+  <button class="btn-success btn-block" type="submit">Add New Category</button>
+</div>
 
 </form>

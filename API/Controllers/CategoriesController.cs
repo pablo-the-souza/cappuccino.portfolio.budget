@@ -24,20 +24,20 @@ namespace Cappuccino.Portfolio.Budget.API.Controllers
             return _context.Categories.ToList();
         }
 
-        // [HttpGet("{id}", Name = "GetCategoryById")]
-        // public ActionResult<Category> GetCategoryById(int id)
-        // {
-        //     return _context.Categories.Find(id);
-        // }
+        [HttpGet("{id}", Name = "GetCategoryById")]
+        public ActionResult<Category> GetCategoryById(int id)
+        {
+            return _context.Categories.Find(id);
+        }
 
-        // [HttpPost]
-        // public ActionResult<Category> AddCategory(Category Category)
-        // {
-        //     _context.Categories.Add(Category);
-        //     _context.SaveChanges();
+        [HttpPost]
+        public ActionResult<Category> AddCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
 
-        //     return CreatedAtAction("GetCategoryById", new { id = Category.Id }, Category);
-        // }
+            return CreatedAtAction("GetCategoryById", new { id = category.Id }, category);
+        }
 
         // [HttpDelete("{id}")]
         // public ActionResult<Category> DeleteCategory(int id)

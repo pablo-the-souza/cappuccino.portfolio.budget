@@ -11,14 +11,47 @@ import { Category } from '../category.model';
   ]
 })
 export class BudgetFormComponent implements OnInit {
+  update: String;
+  selectedOption: number; 
+  categories: Observable<any>; 
   records : Observable<any>; 
+  isAddingCategory : boolean; 
 
   constructor(public service: BudgetService) { }
 
   ngOnInit(): void {
+    this.isAddingCategory = false; 
     this.resetForm();
     this.records = this.service.getRecordsForForm();
-    console.log(this.records)
+    this.categories = this.service.getCategories();
+
+    this.service.categoryFormData = {
+      id: 0,
+      name: ""
+    }
+  }
+
+
+
+  onSubmit(form: NgForm) {
+    console.log(form.value)
+    if (this.service.formData.id == 0)
+      this.insertRecord(form)
+    else 
+      this.updateRecord(form)
+  }
+
+  insertRecord(form: NgForm) {
+    console.log("I'm categoryID = " + form.value.categoryId)
+    this.service.postRecordDetail().subscribe(
+      res => {
+        this.resetForm(form);
+        this.service.getRecords();
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   resetForm(form?: NgForm) {
@@ -31,29 +64,13 @@ export class BudgetFormComponent implements OnInit {
       name: "",
       value: 0,
       categoryId: 0, 
-      // category: new Category(),
       type: ""
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (this.service.formData.id == 0)
-      this.insertRecord(form)
-    else 
-      this.updateRecord(form)
-  }
 
-  insertRecord(form: NgForm) {
-    console.log("I'm category Id = " + form.value.categoryId)
-    this.service.postRecordDetail().subscribe(
-      res => {
-        this.resetForm(form);
-        this.service.getRecords();
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  updateCategory(event: any) {
+    this.service.formData.categoryId = this.selectedOption;
   }
 
   updateRecord(form: NgForm) {
@@ -69,5 +86,22 @@ export class BudgetFormComponent implements OnInit {
       }
     );
   }
+
+  changeIsAddingCategory(){
+    this.isAddingCategory = true; 
+  }
+
+  insertCategory(categoryForm: NgForm){
+    console.log(categoryForm.value)
+    this.service.postCategory().subscribe(
+      res => {
+        console.log("Category Inserted")
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
 
 }

@@ -7,6 +7,5 @@ export class Record {
     value: number;
     categoryId: number;
     type: string;
-    category?: Category;
 }
 

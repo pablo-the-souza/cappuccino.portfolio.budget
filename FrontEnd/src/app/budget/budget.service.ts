@@ -11,6 +11,8 @@ import { Category } from './category.model';
 })
 export class BudgetService {
   formData: Record;
+  categoryFormData: Category; 
+  
   ELEMENT_DATA: Record[] = []
   dataSource = new MatTableDataSource<Record>(this.ELEMENT_DATA);
 
@@ -46,8 +48,18 @@ export class BudgetService {
   }
 
   public getRecordsForForm() {
-    return this.http.get<any>(this.rootURL + '/records')
-      
+    return this.http.get<any>(this.rootURL + '/records') 
+  }
+
+  public getCategories() {
+    return this.http.get<any>(this.rootURL + '/categories')
+  }
+
+  postCategory() {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }
+    return this.http.post(this.rootURL + '/categories', this.categoryFormData, httpOptions)
   }
 
   cancelSubscriptions() {
