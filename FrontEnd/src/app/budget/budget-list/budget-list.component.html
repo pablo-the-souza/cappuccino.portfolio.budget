@@ -1,10 +1,11 @@
 <mat-card>
-    <div fxLayoutAlign="center center">
-        <mat-form-field fxFlex="40%">
+    <div fxLayoutAlign="start center">
+        <mat-form-field fxFlex="30%">
+            <mat-label>Seach Record</mat-label>
             <input matInput type="text" (keyup)="doFilter($event.target.value)" placerholder="filter">
         </mat-form-field>
     </div>
-    
+
     <table mat-table [dataSource]="dataSource" matSort>
         <!-- <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -38,7 +39,7 @@
     
         <ng-container matColumnDef="button">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element"><button class="btn btn-danger btn-block"
+            <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary"
                     (click)="onDelete(element.id)">Delete</button></td>
         </ng-container>
     
@@ -47,4 +48,6 @@
     </table>
     <mat-paginator #paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
     </mat-paginator>
+
+
 </mat-card>

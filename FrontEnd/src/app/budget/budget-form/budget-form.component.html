@@ -1,5 +1,16 @@
 
-<mat-card class="cmon">
+<mat-card class="budget-form" color="primary">
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
+    <mat-form-field *ngIf="!isAddingCategory" appearance="fill">
+      <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="selectedOption" (selectionChange) = updateCategory(event)>
+        <mat-option  *ngFor="let category of categories | async " [value]="category.id" >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
 
   <form 
   fxLayout="row" 
@@ -62,7 +73,7 @@
       </mat-form-field>
     </div> -->
   
-    <!-- CATEGORY -->
+    <!-- HIDDEN CATEGORY -->
     
       
         <input 
@@ -97,11 +108,13 @@
   
     <!-- BUTTON -->
   
-    <div class="form-group">
-        <button class="btn-success btn-lg btn-block" type="submit">Submit</button>
-    </div>
+   
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+
   
   </form>
+
+</div>
 
 
 
@@ -118,22 +131,10 @@ fxLayoutGap="10px"
 autocomplete="off" >
 <mat-label >Can't find your category?</mat-label>
 <div class="form-group">
-  <button class="btn-success btn-block" (click)="changeIsAddingCategory()">Add New Category</button>
+  <button mat-raised-button color="primary" (click)="changeIsAddingCategory()">Add New Category</button>
 </div>
 
 </form>
-
-
-<div>
-  <mat-form-field *ngIf="!isAddingCategory" appearance="fill">
-    <mat-label>Category</mat-label>
-      <mat-select [(ngModel)]="selectedOption" (selectionChange) = updateCategory(event)>
-      <mat-option  *ngFor="let category of categories | async " [value]="category.id" >
-        {{ category.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
 
 <!-- ADD CATEGORY FORM 2 -->
 
@@ -161,7 +162,7 @@ autocomplete="off"
 </mat-form-field>
 
 <div class="form-group">
-  <button class="btn-success btn-block" type="submit">Add New Category</button>
+  <button mat-raised-button color="primary" type="submit">Add New Category</button>
 </div>
 
 </form>
