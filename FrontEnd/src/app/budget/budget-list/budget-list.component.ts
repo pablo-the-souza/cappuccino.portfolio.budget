@@ -10,7 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./budget-list.component.css']
 })
 export class BudgetListComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'date', 'name', 'value', 'category', 'type', 'button']
+  displayedColumns = ['date', 'name', 'value', 'category', 'type', 'button']
   dataSource = this.service.dataSource;
 
   @ViewChild(MatSort) sort: MatSort;

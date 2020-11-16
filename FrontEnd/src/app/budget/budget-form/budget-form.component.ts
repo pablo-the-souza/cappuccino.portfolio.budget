@@ -7,8 +7,7 @@ import { Category } from '../category.model';
 @Component({
   selector: 'app-budget-form',
   templateUrl: './budget-form.component.html',
-  styles: [
-  ]
+  styleUrls: ['./budget-form.component.css']
 })
 export class BudgetFormComponent implements OnInit {
   update: String;
@@ -92,10 +91,11 @@ export class BudgetFormComponent implements OnInit {
   }
 
   insertCategory(categoryForm: NgForm){
-    console.log(categoryForm.value)
+    this.isAddingCategory = false; 
     this.service.postCategory().subscribe(
       res => {
         console.log("Category Inserted")
+        this.categories = this.service.getCategories();
       },
       err => {
         console.log(err);
