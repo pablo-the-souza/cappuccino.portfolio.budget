@@ -42,6 +42,7 @@ import { MatCardModule } from '@angular/material/card';
         MatCardModule
     ]
 })
+
 export class MaterialModule {}
 
 

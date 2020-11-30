@@ -39,14 +39,14 @@ namespace Cappuccino.Portfolio.Budget.API.Controllers
             return CreatedAtAction("GetCategoryById", new { id = category.Id }, category);
         }
 
-        // [HttpDelete("{id}")]
-        // public ActionResult<Category> DeleteCategory(int id)
-        // {
-        //     var categoryForDeletion = _context.Categories.FirstOrDefault(r => r.Id == id);
-        //     _context.Categories.Remove(categoryForDeletion);
-        //     _context.SaveChanges();
-        //     return Ok();
-        // }
+        [HttpDelete("{id}")]
+        public ActionResult<Category> DeleteCategory(int id)
+        {
+            var categoryForDeletion = _context.Categories.FirstOrDefault(r => r.Id == id);
+            _context.Categories.Remove(categoryForDeletion);
+            _context.SaveChanges();
+            return Ok();
+        }
 
         // [HttpPut("{id}")]
         // public ActionResult<Category> UpdateCategory(int id, [FromBody] Category Category)

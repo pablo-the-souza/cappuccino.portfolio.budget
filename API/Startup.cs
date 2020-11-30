@@ -25,16 +25,17 @@ namespace API
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(
-                    @"Server=tcp:pablosouzatest.database.windows.net,1433;Database=testdb;Persist Security Info=False;User ID=paguirre82;Password=Ingrid1pqp;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                // options.UseSqlServer(@"Server=localhost;Database=cappuccinoBudget_db;User ID=sa;Password=Blah123456;");
+               options.UseSqlServer(
+                    @"Server=tcp:cappuccinosqlserver.database.windows.net,1433;Initial Catalog=cappuccino_test_db;Persist Security Info=False;User ID=paguirre82;Password=Ingrid1pqp;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }); 
 
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                     {
-                        // policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://myhabits.z22.web.core.windows.net");
-                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://cappuccinobudget.z8.web.core.windows.net");
+                        // policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
                     });
             });
         }

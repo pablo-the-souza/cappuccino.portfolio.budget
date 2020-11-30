@@ -30,8 +30,6 @@ export class BudgetFormComponent implements OnInit {
     }
   }
 
-
-
   onSubmit(form: NgForm) {
     console.log(form.value)
     if (this.service.formData.id == 0)
